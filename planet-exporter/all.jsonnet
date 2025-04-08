@@ -43,5 +43,6 @@ local deployment = function(name, image, port, replicas) {
 };
 
 [
-    deployment("karel", "ghcr.io/kozaktomas/planet-exporter:main", 9042, 1)
+    deployment("karel", "ghcr.io/kozaktomas/planet-exporter:main", 9042, 1),
+    deployment("matous", "ghcr.io/kozaktomas/planet-exporter:main", 9042, 2)
 ]
