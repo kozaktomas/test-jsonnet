@@ -6,7 +6,7 @@ local container = function(name, image, port) {
     ]
 };
 
-local deployment = function(name, annotations=[], containers=[], replicas=1) {
+local deployment = function(name, annotations={}, containers=[], replicas=1) {
  "apiVersion": "apps/v1",
  "kind": "Deployment",
  "metadata": {
