@@ -47,9 +47,8 @@ local deployment = function(name, image, port, replicas) {
 [
     deployment("karel", "ghcr.io/kozaktomas/planet-exporter:main", 9042, 1),
     deployment("matous", "ghcr.io/kozaktomas/planet-exporter:main", 9042, 2),
-    {
-      foo: k.apps.v1.deployment.new(name="lubos", containers=[
+    k.apps.v1.deployment.new(name="lubos", containers=[
         k.core.v1.container.new(name="lubos", image="ghcr.io/kozaktomas/planet-exporter:main")
-      ])
-    }
+    ])
+
 ]
