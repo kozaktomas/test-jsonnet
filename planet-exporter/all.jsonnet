@@ -22,7 +22,9 @@ local labels = function(name) {
          "replicas": 1,
          "revisionHistoryLimit": 3,
          "selector": {
-            "matchLabels": labels(params.name),
+            "matchLabels": {
+                "app": params.name
+            }
          },
          "template": {
             "metadata": {
