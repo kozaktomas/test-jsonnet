@@ -36,6 +36,10 @@ local deployment = function(name, annotations={}, containers=[], replicas=1) {
 [
     deployment(
         name="planet-exporter",
+        annotations={
+            "a": "1",
+            "b": "2"
+        },
         containers=[
             container("planet-exporter", "ghcr.io/kozaktomas/planet-exporter:main", 9042),
             container("planet-exporter-druhy", "ghcr.io/kozaktomas/planet-exporter:main", 9078),
