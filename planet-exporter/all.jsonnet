@@ -21,7 +21,7 @@ local deployment = function(name, image, port, replicas) {
      "template": {
         "metadata": {
            "labels": {
-                name: name
+                "app": name
            }
         },
         "spec": {
