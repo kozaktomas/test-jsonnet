@@ -4,46 +4,44 @@ local params = {
     containerPort: 9042,
 };
 
-local labels = function(name) {
-    "app": params.name,
-    "a": name,
-    "b": name,
-    "version": '0.1.69',
+
+local deployment = function(name, image, port, replicas) {
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+     "name": name
+  },
+  "spec": {
+     "replicas": replicas,
+     "selector": {
+        "matchLabels": {
+            "app": name
+        }
+     },
+     "template": {
+        "metadata": {
+           "labels": {
+                name: name
+           }
+        },
+        "spec": {
+           "containers": [
+              {
+                 "image": image,
+                 "name": name,
+                 "ports": [
+                 {
+                    "containerPort": port
+                 }
+                 ]
+              }
+           ]
+        }
+     }
+  }
+
 };
 
 [
-   {
-      "apiVersion": "apps/v1",
-      "kind": "Deployment",
-      "metadata": {
-         "name": params.name
-      },
-      "spec": {
-         "replicas": 1,
-         "revisionHistoryLimit": 3,
-         "selector": {
-            "matchLabels": {
-                "app": params.name
-            }
-         },
-         "template": {
-            "metadata": {
-               "labels": labels(params.name),
-            },
-            "spec": {
-               "containers": [
-                  {
-                     "image": params.image,
-                     "name": params.name,
-                     "ports": [
-                     {
-                        "containerPort": params.containerPort
-                     }
-                     ]
-                  }
-               ]
-            }
-         }
-      }
-   }
+    deployment("karel", "ghcr.io/kozaktomas/karel:main", 9042, 1)
 ]
