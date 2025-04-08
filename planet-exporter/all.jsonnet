@@ -6,9 +6,9 @@ local params = {
 
 local labels = function(name) {
     "app": params.name,
-    "app.kubernetes.io/name": name,
-    "app.kubernetes.io/instance": name,
-    "app.kubernetes.io/version": '0.1.69',
+    "a": name,
+    "b": name,
+    "version": '0.1.69',
 };
 
 [
