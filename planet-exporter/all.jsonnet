@@ -4,6 +4,13 @@ local params = {
     containerPort: 9042,
 };
 
+local labels = function(name) {
+    "app": params.name,
+    "app.kubernetes.io/name": name,
+    "app.kubernetes.io/instance": name,
+    "app.kubernetes.io/version": '0.1.69',
+};
+
 [
    {
       "apiVersion": "apps/v1",
@@ -15,15 +22,11 @@ local params = {
          "replicas": 1,
          "revisionHistoryLimit": 3,
          "selector": {
-            "matchLabels": {
-               "app": params.name
-            },
+            "matchLabels": labels(params.name),
          },
          "template": {
             "metadata": {
-               "labels": {
-                  "app": params.name
-               }
+               "labels": labels(params.name),
             },
             "spec": {
                "containers": [
