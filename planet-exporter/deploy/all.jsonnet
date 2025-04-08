@@ -10,7 +10,10 @@ local deployment = function(name, containers=[], replicas=1) {
  "apiVersion": "apps/v1",
  "kind": "Deployment",
  "metadata": {
-    "name": name
+    "name": name,
+    "annotations": {
+       "ahoj": "vole"
+    },
  },
  "spec": {
     "replicas": replicas,
