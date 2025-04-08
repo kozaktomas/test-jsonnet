@@ -1,3 +1,11 @@
+local container = function(name, image, port) {
+    "image": image,
+    "name": name,
+    "ports": [
+        {"containerPort": port}
+    ]
+};
+
 local deployment = function(name, image, port, replicas=1) {
  "apiVersion": "apps/v1",
  "kind": "Deployment",
