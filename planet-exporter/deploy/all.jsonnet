@@ -6,7 +6,7 @@ local container = function(name, image, port) {
     ]
 };
 
-local deployment = function(name, image, port, replicas=1) {
+local deployment = function(name, containers=[], replicas=1) {
  "apiVersion": "apps/v1",
  "kind": "Deployment",
  "metadata": {
@@ -26,22 +26,16 @@ local deployment = function(name, image, port, replicas=1) {
           }
        },
        "spec": {
-          "containers": [
-             {
-                "image": image,
-                "name": name,
-                "ports": [
-                {
-                   "containerPort": port
-                }
-                ]
-             }
-          ]
+            "containers": containers,
        }
     }
  }
 };
 
 [
-    deployment("planet-exporter", "ghcr.io/kozaktomas/planet-exporter:main", 9042)
+    deployment("planet-exporter", containers=[
+        container("planet-exporter", "ghcr.io/kozaktomas/planet-exporter:main", 9042),
+        container("planet-exporter-druhy", "ghcr.io/kozaktomas/planet-exporter:main", 9078),
+    ])
+
 ]
